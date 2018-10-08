@@ -7,7 +7,7 @@ var OAuthClients = {
         "projectUrl": "https://agaveapi.co/",
         "supportUrl": "https://github.com/agaveplatform/agave-togo/issues",
         "signupUrl": "https://public.agaveapi.co/create_account",
-        "allowsSignup": true
+        "allowsSignup": false
     },
     "iplantc.org": {
         "clientKey": "0ef7LZAli2coKuiE1h6dgFH5b7Aa",
