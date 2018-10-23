@@ -1,16 +1,7 @@
 // staging
 var OAuthClients = {
-    "iplantc.org": {
-        "clientKey": "0ef7LZAli2coKuiE1h6dgFH5b7Aa",
-        "callbackUrl": "http://togo.agaveplatform.org/auth/",
-        "scope": "PRODUCTION",
-        "projectUrl": "https://cyverse.org/",
-        "supportUrl": "https://ask.cyverse.org/",
-        "signupUrl": "https://user.cyverse.org/register/",
-        "allowsSignup": false
-    },
     "tacc.prod": {
-        "clientKey": "Z9JFMDIDUhaEC8jwOXw6eSTY7eoa",
+        "clientKey": "ikfnmQFAo0azBFB4g7FR2fOhXUAa",
         "callbackUrl": "http://togo.agaveplatform.org/auth/",
         "scope": "PRODUCTION",
         "projectUrl": "https://tacc.utexas.edu/",
@@ -18,18 +9,9 @@ var OAuthClients = {
         "signupUrl": "https://portal.tacc.utexas.edu/account-request",
         "allowsSignup": false
     },
-    "designsafe": {
-        "clientKey": "Z9JFMDIDUhaEC8jwOXw6eSTY7eoa",
-        "callbackUrl": "http://togo.agaveplatform.org/auth/",
-        "scope": "PRODUCTION",
-        "projectUrl": "https://designsafe-ci.org/",
-        "supportUrl": "https://designsafe-ci.org/contact",
-        "signupUrl": "https://portal.tacc.utexas.edu/account-request",
-        "allowsSignup": false
-    },
     "sandbox": {
         "baseUrl": "https://sandbox.agaveplatform.org",
-        "clientKey": "L6zWQ745GQHrqPO740WbXsLOpLka",
+        "clientKey": "SasylQ2D2YdL29R6l5DdxyvEzXYa",
         "callbackUrl": "http://togo.agaveplatform.org/auth/",
         "scope": "PRODUCTION",
         "projectUrl": "http://agaveplatform.org/",
