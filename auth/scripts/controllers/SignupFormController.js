@@ -1,6 +1,6 @@
 angular.module('AgaveAuth').controller('SignupFormController', function ($injector, $timeout, $rootScope, $scope, $state, $stateParams, $filter, settings, $localStorage, AccessToken, TenantsController, Commons, Alerts) {
 
-  $scope.tenantId = $stateParams.tenantId || "agave.prod";
+  $scope.tenantId = $stateParams.tenantId || "sandbox";
 
   $scope.selectedTenant = $filter('filter')($rootScope.settings.tenants, {"code": $scope.tenantId});
 

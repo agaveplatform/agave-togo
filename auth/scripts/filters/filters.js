@@ -32,8 +32,8 @@ angular.module('AgaveAuth')
 })
 .filter('tenantWebsite', function () {
     return function (tenantCode, defaultUrl) {
-        if (tenantCode === 'agave.prod') {
-            return 'https://agaveapi.co/';
+        if (tenantCode === 'agave.prod' || tenantCode === 'sandbox') {
+            return 'https://agaveplatform.org/';
         } else if (tenantCode === 'iplantc.org') {
             return 'https://cyverse.org/';
         } else if (tenantCode === 'araport') {

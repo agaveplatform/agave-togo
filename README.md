@@ -53,7 +53,7 @@ You must set your own `clientKey` and `callbackUrl` in `/agave-togo/auth/scripts
 
 ```
 var OAuthClients = {
-    "agave.prod": {
+    "sandbox": {
         "clientKey": "r7tbaux...",
         "callbackUrl": "https://localhost:9000/auth/",
         "createAccountUrl": "https://www.araport.org/user/register",
@@ -67,9 +67,9 @@ An easy way to register your client and obtain your `clientKey` and `callbackUrl
 ```
 $ tenants-init
 Please select a tenant from the following list:
-[0] agave.prod
+[0] sandbox
 Your choice [3]: 0
-You are now configured to interact with the APIs at https://public.agaveapi.co/
+You are now configured to interact with the APIs at https://sandbox.agaveplatform.org/
 
 $ clients-create -N "agave_client" -C "https://localhost:9000/auth/" -S
 API username : yourusername
@@ -80,8 +80,8 @@ secret: NaH3...
 
 $ auth-check -v
 {
-  "tenantid": "agave.prod",
-  "baseurl": "https://public.agaveapi.co",
+  "tenantid": "sandbox",
+  "baseurl": "https://sandbox.agaveplatform.org",
   "devurl": "",
   "apisecret": "NaH3...",
   "apikey": "2YR...",

@@ -1,12 +1,12 @@
 // production
 var OAuthClients = {
-    "agave.prod": {
+    "sandbox": {
         "clientKey": "S7vVnYUW1O2UNF5WqE4BahVfFJca",
         "callbackUrl": "https://togo.agaveapi.co/auth/",
         "scope": "PRODUCTION",
-        "projectUrl": "https://agaveapi.co/",
+        "projectUrl": "https://agaveplatform.org/",
         "supportUrl": "https://support.agaveapi.co",
-        "signupUrl": "https://public.agaveapi.co/create_account"
+        "signupUrl": "https://sandbox.agaveplatform.org/create_account"
     },
     "iplantc.org": {
         "clientKey": "wertyerthdfgbwergwerg2345dfsgwer",

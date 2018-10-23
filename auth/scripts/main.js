@@ -125,7 +125,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         templateUrl: "views/templates/login-form.html",
         data: {
           pageTitle: 'Sign In',
-          tenantId: 'agave.prod'
+          tenantId: 'sandbox'
         },
         controller: "LoginFormController",
         resolve: {
@@ -148,7 +148,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         templateUrl: "views/templates/login-form.html",
         data: {
           pageTitle: 'Sign In',
-          tenantId: 'agave.prod'
+          tenantId: 'sandbox'
         },
         controller: "LoginFormController",
         resolve: {
@@ -171,7 +171,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         templateUrl: "views/templates/password-reset-form.html",
         data: {
           pageTitle: 'Password Reset',
-          tenantId: 'agave.prod'
+          tenantId: 'sandbox'
         },
         controller: "PasswordResetController",
         resolve: {

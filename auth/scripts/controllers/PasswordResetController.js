@@ -1,6 +1,6 @@
 angular.module('AgaveAuth').controller('PasswordResetController', function ($rootScope, $scope, $state, $stateParams) {
 
-  $scope.tenantId = $stateParams.tenantId || 'agave.prod';
+  $scope.tenantId = $stateParams.tenantId || 'sandbox';
   $scope.email = '';
 
   $('.forget-form').validate({
