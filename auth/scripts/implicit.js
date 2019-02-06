@@ -11,7 +11,7 @@ var OAuthClients = {
     },
     "sandbox": {
         "baseUrl": "https://sandbox.agaveplatform.org",
-        "clientKey": "SasylQ2D2YdL29R6l5DdxyvEzXYa",
+        "clientKey": "5fEAikgrQk00GlqUSzsCixBORNIa",
         "callbackUrl": "http://togo.agaveplatform.org/auth/",
         "scope": "PRODUCTION",
         "projectUrl": "http://agaveplatform.org/",
