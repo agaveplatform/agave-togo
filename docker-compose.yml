@@ -2,8 +2,8 @@ version: '2'
 
 services:
   web:
-    image: agaveapi/httpd:2.4
-    hostname: togo.staging.agaveplatform.org
+    image: agaveplatform/apache:2.4
+    hostname: togo.agaveplatform.org
     restart: on-failure
     environment:
       - 'DOCUMENT_ROOT=/var/www/html'

@@ -48,7 +48,7 @@
                id="forget-password-external" class="forget-password">Forgot Password</a>
 
         </div>
-        <div class="login-options">
+        <div class="login-options" ng-if="settings.tenants.length > 1">
             <h4>Or login with another organization</h4>
             <ul class="social-icons">
                 <li ng-repeat="item in settings.tenants | filter:excludeSelectedTenant">

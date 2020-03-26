@@ -238,7 +238,7 @@
                 }
             }
             return a;
-        }
+        };
 
         $scope.addForUpload = function($files) {
            $scope.uploadFileList = $scope.uniqueFiles($scope.uploadFileList.concat($files));

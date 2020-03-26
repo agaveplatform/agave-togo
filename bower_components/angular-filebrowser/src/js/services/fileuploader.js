@@ -51,13 +51,18 @@
         this.makeFolders = function(fileList, system, path){
           var promises = [];
           var self = this;
-          var foldersUri = Configuration.BASEURI + 'files/v2/media/system/' + system.id + '/'+"/?naked=true&action=mkdir";
+          var foldersUri = Configuration.BASEURI +
+              (_.endsWith(Configuration.BASEURI, '/') ? '' : '/') +
+              'files/v2/media/system/' +
+              system.id + '/' +
+              "/?naked=true&action=mkdir";
+
            //create directories first
           angular.forEach(fileList, function (fileObj, key) {
             self.requesting = true;
             if (fileObj.type == 'directory'){
              var body = {};
-             body.action = 'mkdir'
+             body.action = 'mkdir';
              body.path = fileObj.path;
              promises.push(
                FilesController.updateInvokeFileItemAction(body, system.id, path.join('/'))
@@ -190,8 +195,11 @@
                   }
 
                   self.requesting = true;
-
-                  var filesUri = Configuration.BASEURI + 'files/v2/media/system/' + system.id + '/' + path.join('/');
+                  var filesUri = Configuration.BASEURI +
+                      (_.endsWith(Configuration.BASEURI, '/') ? '' : '/') +
+                      'files/v2/media/system/' +
+                      system.id + '/' +
+                      path.join('/');
 
                   promises.push(
                     self.uploadFile(fileObj, form, filesUri, function(value){
