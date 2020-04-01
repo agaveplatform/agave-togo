@@ -52,7 +52,7 @@
           var promises = [];
           var self = this;
           var foldersUri = Configuration.BASEURI +
-              (_.endsWith(Configuration.BASEURI, '/') ? '' : '/') +
+              (Configuration.BASEURI.endsWith('/') ? '' : '/') +
               'files/v2/media/system/' +
               system.id + '/' +
               "/?naked=true&action=mkdir";
@@ -196,7 +196,7 @@
 
                   self.requesting = true;
                   var filesUri = Configuration.BASEURI +
-                      (_.endsWith(Configuration.BASEURI, '/') ? '' : '/') +
+                      (Configuration.BASEURI.endsWith('/') ? '' : '/') +
                       'files/v2/media/system/' +
                       system.id + '/' +
                       path.join('/');
