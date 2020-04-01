@@ -27,7 +27,7 @@
                         <span class="caption-subject font-dark bold uppercase">{{ systemId }}</span></div>
                     <uib-tabset ng-show="!error">
                         <uib-tab
-                                ng-repeat="t in tabs"
+                                ng-repeat="t in tabs | filterBySystemType:system"
                                 heading="{{t.heading}}"
                                 select="go(t.route)"
                                 active="t.active">

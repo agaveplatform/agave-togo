@@ -1978,6 +1978,7 @@ AgaveToGo.config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryPro
               {
                 name: 'AgaveToGo',
                 files: [
+                  'js/services/MessageService.js',
                   'js/controllers/systems/resource/SystemsResourceController.js'
                 ]
               }

@@ -50,6 +50,18 @@
              <td>Public</td>
              <td>{{system.public}}</td>
            </tr>
+           <tr ng-if="system.storage && system.storage.rootDir">
+               <td>Root Directory</td>
+               <td>{{system.storage.rootDir}}</td>
+           </tr>
+           <tr ng-if="system.storage && system.storage.homeDir">
+               <td>Home Directory</td>
+               <td>{{system.storage.homeDir}}</td>
+           </tr>
+           <tr ng-if="system.type === 'STORAGE' && system.storage && system.storage.publicAppsDir">
+               <td>Public Apps Directory</td>
+               <td>{{system.storage.publicAppsDir}}</td>
+           </tr>
            <tr ng-if="system.scheduler">
              <td>Scheduler</td>
              <td>{{system.scheduler}}</td>
