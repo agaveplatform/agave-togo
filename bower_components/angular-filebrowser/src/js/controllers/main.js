@@ -85,7 +85,7 @@
                   $scope.temp.error = errorMsg;
               });
             } else if ($scope.config.allowedActions.agaveSelect === true){
-                $rootScope.uploadFileContent = 'agave://' + item.model.system.id + item.model.fullPath();
+                $rootScope.uploadFileContent = 'agave://' + item.model.system.id + "/" + item.model.fullPath();
             } else {
               item.preview();
               $scope.temp = item;
@@ -315,7 +315,7 @@
         };
 
         $scope.selectItem = function(item){
-          $rootScope.uploadFileContent = 'agave://' + item.model.system.id + item.model.fullPath();
+          $rootScope.uploadFileContent = 'agave://' + item.model.system.id + "/" + item.model.fullPath();
         };
 
         $scope.changeLanguage($scope.getQueryParam('lang'));

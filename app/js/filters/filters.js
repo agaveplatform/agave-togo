@@ -37,6 +37,12 @@ angular.module('AgaveToGo')
         return Apps.getAuthenticatedUserProfile().username === username;
       }
     })
+    .filter('clean', function () {
+      return function (str) {
+        str = str || "";
+        return str.trim().replace(/\s+/g, '')
+      }
+    })
     .filter('getAbsoluteAgaveSystemPath', ['$localStorage', function ($localStorage) {
       return function (system) {
         var path = "";

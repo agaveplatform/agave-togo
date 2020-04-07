@@ -124,6 +124,7 @@
   "error_systems_edit_permission": "Error: User does not have permission to edit system",
   "error_systems_form": "Error: Invalid form. Please check all fields",
   "error_systems_list": "Error: Could not retrieve system",
+  "error_systems_default_storage_list": "Error: Could not retrieve user's default storage system",
   "error_systems_roles": "Error: Could not retrieve roles",
   "error_systems_roles_update": "Error: Could not update roles",
   "error_systems_search": "Error: Could not retrieve systems",
