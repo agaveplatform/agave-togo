@@ -1,42 +1,13 @@
 angular.module('AgaveAuth').controller('LogoutController', function ($injector, $timeout, $rootScope, $scope, $state, moment, $location, settings, $localStorage, AccessToken, TenantsController, Commons, Alerts) {
 
-    settings.layout.tenantPage = true;
-    settings.layout.loginPage = false;
+    // clean up the previous login and tenant info, forcing a refresh.
+    $rootScope.$broadcast('oauth:logout', $localStorage.token);
 
-    //$scope.loggedIn = !!AccessToken.get();
+    delete $localStorage.token;
+    delete $localStorage.client;
+    delete $localStorage.tenant;
+    delete $localStorage.activeProfile;
 
-    $timeout(function() {
-        $scope.profile = $localStorage.activeProfile;
-        $scope.tenant = $localStorage.tenant;
+    $state.go("oauth-default");
 
-        // delete $localStorage.activeProfile;
-        // delete $localStorage.token;
-    }, 50);
-
-    $scope.$watch('$localStorage.activeProfile', function(value){
-        $timeout(function () {
-            $scope.profile = $localStorage.activeProfile;
-        }, 0);
-    }, true);
-
-    $scope.$watch('settings.tenants', function(value){
-        $timeout(function () {
-            $rootScope.$broadcast('oauth:template:update', '/auth/views/templates/oauth-ng-button.html');
-        }, 0);
-    }, true);
-
-    // show content on state change success
-    $scope.$on('$stateChangeSuccess', function () {
-        jQuery('.content.hide, .copyright.hide').removeClass('hide'); // show content area
-    });
-
-    // show content on state change success
-    $scope.$on('$stateChangeError', function () {
-        jQuery('.content.hide, .copyright.hide').removeClass('hide'); // show content area
-    });
-
-    // show content on state change success
-    $scope.$on('$stateNotFound', function () {
-        jQuery('.content.hide, .copyright.hide').removeClass('hide'); // show content area
-    });
 });

@@ -48,10 +48,10 @@
                id="forget-password-external" class="forget-password">Forgot Password</a>
 
         </div>
-        <div class="login-options" ng-if="settings.tenants.length > 1">
+        <div class="login-options" ng-if="tenants.length > 1">
             <h4>Or login with another organization</h4>
             <ul class="social-icons">
-                <li ng-repeat="item in settings.tenants | filter:excludeSelectedTenant">
+                <li ng-repeat="item in tenants | filter:excludeSelectedTenant">
                     <a class="img-rounded {item.code}}" title="{{item.name}}" data-original-title="{item.code}}"
                        style="overflow:hidden;"
                        ui-sref="login-form({tenantId: item.code})">

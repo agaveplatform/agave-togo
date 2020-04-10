@@ -1,8 +1,8 @@
-angular.module('AgaveAuth').controller('LoginFormController', function ($rootScope, $scope, $state, $stateParams, $http, $window, $localStorage, $filter, settings, Commons, Alerts, TokensController, ProfilesController, APIHelper, Configuration) {
+angular.module('AgaveAuth').controller('SigninFormController', function ($rootScope, $scope, $state, $stateParams, $http, $window, $localStorage, $filter, $timeout, settings, Commons, Alerts, TokensController, ProfilesController, APIHelper, Configuration) {
 
   $scope.getTenantByCode = function (tenantId) {
     var namedTenant = false;
-    angular.forEach(settings.tenants, function (tenant, key) {
+    angular.forEach($scope.tenants, function (tenant, key) {
       if (tenant.code === tenantId) {
         namedTenant = tenant;
         return false;
@@ -198,7 +198,7 @@ angular.module('AgaveAuth').controller('LoginFormController', function ($rootSco
             //   delete $localStorage.client;
             // }
 
-            Configuration.setToken(token);
+            Configuration.setToken(token.access_token);
 
             $localStorage.token = token;
 
@@ -390,19 +390,19 @@ angular.module('AgaveAuth').controller('LoginFormController', function ($rootSco
   });
 
 
-  $scope.settings = settings;
+  $scope.tenants = settings.tenants;
 
   $scope.remember = true;
 
-  var currentTenantId;
+  var currentTenantId = '';
   if ($stateParams.tenantId) {
     currentTenantId = $stateParams.tenantId;
   }
   else if ($localStorage.tenant && $localStorage.tenant.code) {
     currentTenantId =  $localStorage.tenant.code;
   }
-  else {
-    currentTenantId = settings.tenants.length && settings.tenants[0].code;
+  else if ($scope.tenants.length) {
+    currentTenantId = $scope.tenants[0].code;
   }
 
   $scope.selectedTenant = $scope.getTenantByCode(currentTenantId);
@@ -417,6 +417,35 @@ angular.module('AgaveAuth').controller('LoginFormController', function ($rootSco
         client_secret: '',
         remember: 0
       };
+
+  if ($scope.user.client_secret != '' && $scope.user.client_key != '') {
+    $scope.attemptTokenRefresh($localStorage.token);
+  } else {
+    Alerts.info({
+      container: '#form-title-header',
+      message: "You may drag and drop a local Agave CLI cache file from your desktop onto this form, or fill out " +
+          "the following form with your own client keys and login info to complete your sign in. <br> " +
+          "<em><strong>This login method should not be used on a shared computer.</strong></em>"
+    });
+  }
+
+  $scope.$watch('settings.tenants', function(){
+    $timeout(function () {
+      if ($rootScope.settings.tenants.length) {
+        $scope.tenants = $rootScope.settings.tenants;
+
+        if (currentTenantId === '') {
+          currentTenantId = $scope.tenants[0].code;
+        }
+
+        // update the selected tenant if now present
+        $scope.selectedTenant = $scope.getTenantByCode(currentTenantId);
+        if (!_.isEmpty($scope.selectedTenant)) {
+          $localStorage.tenant = $scope.selectedTenant;
+        }
+      }
+    }, 0);
+  }, true);
 
   // show content on state change success
   $scope.$on('$stateChangeSuccess', function () {

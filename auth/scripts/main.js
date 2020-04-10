@@ -1,35 +1,37 @@
 /**
  * Definition of the main app module and its dependencies
  */
-var AgaveAuth = angular
-    .module('AgaveAuth', [
-      'ui.bootstrap',
-      'ui.router',
-      'angular-cache',
-      'oc.lazyLoad',
-      'angularMoment',
-      'ngStorage',
-      'ngSanitize',
-      'oauth',
-      'ngMd5',
-      'ui.select',
-      'AlertService',
-      'agave.sdk',
-      'CommonsService',
-      'ngFileUpload'
-    ]);
+var AgaveAuth = angular.module('AgaveAuth', [
+  'ui.bootstrap',
+  'ui.router',
+  'angular-cache',
+  'oc.lazyLoad',
+  'angularMoment',
+  'ngStorage',
+  'ngSanitize',
+  'oauth',
+  'ngMd5',
+  'ui.select',
+  'AlertService',
+  'agave.sdk',
+  'CommonsService',
+  'ngFileUpload'
+])
+.config(['$localStorageProvider',
+    function ($localStorageProvider) {
+        $localStorageProvider.setKeyPrefix('agavetogo.');
+    }]);
 
 AgaveAuth.config(function ($locationProvider) {
   $locationProvider.html5Mode({
     enabled: false,
-    //hashPrefix: '!',
     required: false
   });
-})
+});
 
 
 AgaveAuth.factory('settings', ['$rootScope', function ($rootScope) {
-  // supported languages
+    //   // supported languages
   var settings = {
     oauth: {
       clients: OAuthClients,
@@ -99,7 +101,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
               files: [
                 //'../auth/css/tenants.css',
                 '../assets/global/plugins/countdown/jquery.countdown.min.js',
-                '../auth/scripts/controllers/LoginSuccessController.js',
+                '../auth/scripts/controllers/LoginSuccessController.js'
               ]
             });
           }],
@@ -122,12 +124,12 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
       // Login
       .state('login-form-default', {
         url: "/signin",
-        templateUrl: "views/templates/login-form.html",
+        templateUrl: "views/templates/signin-form.html",
         data: {
           pageTitle: 'Sign In',
           tenantId: 'sandbox'
         },
-        controller: "LoginFormController",
+        controller: "SigninFormController",
         resolve: {
           deps: ['$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -135,7 +137,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
               insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
               files: [
                 //'../auth/css/tenants.css',
-                '../auth/scripts/controllers/LoginFormController.js'
+                '../auth/scripts/controllers/SigninFormController.js'
               ]
             });
           }]
@@ -145,12 +147,12 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
       // Login
       .state('login-form', {
         url: "/signin/:tenantId",
-        templateUrl: "views/templates/login-form.html",
+        templateUrl: "views/templates/signin-form.html",
         data: {
           pageTitle: 'Sign In',
           tenantId: 'sandbox'
         },
-        controller: "LoginFormController",
+        controller: "SigninFormController",
         resolve: {
           deps: ['$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -158,7 +160,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
               insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
               files: [
                 //'../auth/css/tenants.css',
-                '../auth/scripts/controllers/LoginFormController.js'
+                '../auth/scripts/controllers/SigninFormController.js'
               ]
             });
           }]
@@ -211,13 +213,17 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
         url: "/logout",
         templateUrl: "views/logout.html",
         data: {pageTitle: 'Sign Out'},
-        controller: function ($scope, $rootScope, $state, $localStorage) {
-
-          $rootScope.$broadcast('oauth:logout', $localStorage.token);
-
-          delete $localStorage.token;
-
-          $state.go("oauth-default");
+        controller: "LogoutController",
+        resolve: {
+          deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+              return $ocLazyLoad.load({
+                  name: 'AgaveAuth',
+                  insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                  files: [
+                      'scripts/controllers/LogoutController.js'
+                  ]
+              });
+          }]
         }
       })
 
@@ -233,8 +239,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
               name: 'AgaveAuth',
               insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
               files: [
-                //'../auth/css/login.css',
-                'scripts/controllers/SignupFormController.js',
+                'scripts/controllers/SignupFormController.js'
               ]
             });
           }]
@@ -246,7 +251,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
           url: "/login",
           templateUrl: "views/templates/oauth-form.html",
           data: {pageTitle: 'Sign In'},
-          controller: "LoginFormController",
+          controller: "OAuthImplicitLoginController",
           resolve: {
               deps: ['$ocLazyLoad', function($ocLazyLoad) {
                   return $ocLazyLoad.load({
@@ -254,7 +259,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                       // insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                       files: [
                           '../auth/css/tenants.css',
-                          '../auth/scripts/controllers/LoginFormController.js',
+                          '../auth/scripts/controllers/OAuthImplicitLoginController.js'
                       ]
                   });
               }]
@@ -266,7 +271,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
           url: "/login/:tenantId",
           templateUrl: "views/templates/oauth-form.html",
           data: {pageTitle: 'Sign In'},
-          controller: "LoginFormController",
+          controller: "OAuthImplicitLoginController",
           resolve: {
               deps: ['$ocLazyLoad', function($ocLazyLoad) {
                   return $ocLazyLoad.load({
@@ -274,7 +279,7 @@ AgaveAuth.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                       insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                       files: [
                           '../auth/css/tenants.css',
-                          '../auth/scripts/controllers/LoginFormController.js',
+                          '../auth/scripts/controllers/OAuthImplicitLoginController.js'
                       ]
                   });
               }]
@@ -346,7 +351,7 @@ AgaveAuth.run(["$rootScope", "$location", "$state", "$timeout", "$localStorage",
   // allow autoconfiguration of the discovery endpoint for local
   // installs.
   if (_.keys(settings.oauth.clients).length === 1) {
-      var onlyClient = settings.oauth.clients[_.keys(settings.oauth.clients)[0]];
+      var onlyClient = _.first(_.values(settings.oauth.clients));
       if (onlyClient.hasOwnProperty('baseUrl') && onlyClient.baseUrl) {
           Configuration.BASEURI = onlyClient.baseUrl;
       }
@@ -395,6 +400,8 @@ AgaveAuth.run(["$rootScope", "$location", "$state", "$timeout", "$localStorage",
         Alerts.danger({message: "Failed to retrieve tenant information."});
       }
   );
+
+
 
   $rootScope.$on('oauth:login', function (event, token) {
     $localStorage.token = token;

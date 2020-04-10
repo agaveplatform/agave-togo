@@ -123,7 +123,7 @@
 
           this.remove = function (key) {
             providerWebStorage && providerWebStorage.removeItem(storageKeyPrefix + key);
-          }
+          };
 
           this.$get = [
               '$rootScope',

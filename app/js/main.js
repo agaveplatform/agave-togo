@@ -56,11 +56,11 @@ AgaveToGo.config(function(fileManagerConfigProvider) {
       postits: true,
       publish: false,
       notifications: true
-    },
+    }
   });
 });
 
-AgaveToGo.config(function ($locationProvider, $translateProvider, $translatePartialLoaderProvider ) {
+AgaveToGo.config(function ($locationProvider, $translateProvider, $translatePartialLoaderProvider, $localStorageProvider ) {
 
   $locationProvider.html5Mode({
     enabled: false,
@@ -90,6 +90,10 @@ AgaveToGo.config(function ($locationProvider, $translateProvider, $translatePart
       //.determinePreferredLanguage();// define language by browser language
       .preferredLanguage('en-us');
 
+  /**
+   * Set prefix on local storage module
+   */
+  $localStorageProvider.setKeyPrefix('agavetogo.');
 });
 
 AgaveToGo.config(function ($provide) {
@@ -2570,7 +2574,7 @@ AgaveToGo.run(['$rootScope', 'settings', '$state', '$http', '$templateCache', '$
                   $localStorage.token.access_token = refreshTokenResponse.access_token;
                   $localStorage.token.expires = refreshTokenResponse.expires_in;
                   $localStorage.token.expires_at = moment(refreshTokenResponse.expires_in).toDate();
-
+                  Configuration.setToken(refreshTokenResponse.access_token);
                   App.alert(
                       {
                         type: 'info',
